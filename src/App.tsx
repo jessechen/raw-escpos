@@ -11,7 +11,7 @@ function getCookieValue(cookie: string): string {
 }
 
 function App() {
-  const defaultText = "hello printer";
+  const defaultText = "77 68 6f 6f";
   const endpoint = "https://receipt.recurse.com/escpos";
   const token = getCookieValue(document.cookie);
 
@@ -19,11 +19,15 @@ function App() {
     e.preventDefault();
 
     try {
- const testbytes = new Uint8Array([0x1b, 0x40, 0x1d, 0x42, 0x01, 0x48, 0x45, 0x4c, 0x4c, 0x4f, 0x1b, 0x64, 0x06, 0x1d, 0x56, 0x00]);
+    const formData = new FormData(e.target);
+    const formText = formData.get("text") as string;
+    const formBytes = formText.split(' ').map(b => parseInt(b, 16));
+    const bytes = [0x1b, 0x40].concat(formBytes, [0x1b, 0x64, 0x06, 0x1d, 0x56, 0x00]);
+    const datas = new Uint8Array(bytes);
 
       const response = await fetch(endpoint, {
         method: "POST",
-        body: testbytes,
+        body: datas,
         credentials: "include",
         headers: { "X-CSRF-Token": token, "Content-Type": "application/octet-stream" },
       });
@@ -49,7 +53,7 @@ function App() {
       {token ? (
         <div>
           <form onSubmit={onSubmit}>
-            <label htmlFor="text">Text to ignore3:</label>
+            <label htmlFor="text">Space-delimited hex values to send:</label>
             <textarea
               id="text"
               name="text"
