@@ -48,14 +48,14 @@ function App() {
       {token ? (
         <div>
           <form onSubmit={onSubmit}>
-            <label htmlFor="text">Text to print:</label>
+            <label htmlFor="text">HELLO WORLD:</label>
             <textarea
               id="text"
               name="text"
               rows={5}
               cols={33}
               defaultValue={defaultText}
-            ></textarea>
+            >HELLO</textarea>
             <button type="submit">Print</button>
           </form>
         </div>
