@@ -22,7 +22,7 @@ function App() {
     try {
       const response = await fetch(endpoint, {
         method: "POST",
-        body: JSON.stringify({ text: formData.get("text") }),
+        body: JSON.stringify({ text: formData.get("text") + "AND BONNIE!" }),
         credentials: "include",
         headers: { "X-CSRF-Token": token, "Content-Type": "application/json" },
       });
@@ -55,7 +55,7 @@ function App() {
               rows={5}
               cols={33}
               defaultValue={defaultText}
-            >HELLO</textarea>
+            ></textarea>
             <button type="submit">Print</button>
           </form>
         </div>
