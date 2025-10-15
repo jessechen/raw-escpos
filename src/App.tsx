@@ -25,7 +25,7 @@ function App() {
         method: "POST",
         body: testbytes,
         credentials: "include",
-        headers: { "X-CSRF-Token": token, "Content-Type": "application/json" },
+        headers: { "X-CSRF-Token": token, "Content-Type": "application/octet-stream" },
       });
 
       if (!response.ok) {
@@ -49,7 +49,7 @@ function App() {
       {token ? (
         <div>
           <form onSubmit={onSubmit}>
-            <label htmlFor="text">Text to ignore:</label>
+            <label htmlFor="text">Text to ignore2:</label>
             <textarea
               id="text"
               name="text"
