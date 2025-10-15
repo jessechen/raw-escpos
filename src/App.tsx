@@ -21,7 +21,7 @@ function App() {
     try {
     const formData = new FormData(e.target);
     const formText = formData.get("text") as string;
-    const formBytes = formText.split(' ').map(b => parseInt(b, 16));
+    const formBytes = formText.split(/\s/).map(b => parseInt(b, 16));
     const bytes = [0x1b, 0x40].concat(formBytes, [0x1b, 0x64, 0x06, 0x1d, 0x56, 0x00]);
     const datas = new Uint8Array(bytes);
 
