@@ -12,7 +12,7 @@ function getCookieValue(cookie: string): string {
 
 function App() {
   const defaultText = "hello printer";
-  const endpoint = "https://receipt.recurse.com/text";
+  const endpoint = "https://receipt.recurse.com/escpos";
   const token = getCookieValue(document.cookie);
 
   const onSubmit = async (e: any) => {
@@ -20,9 +20,11 @@ function App() {
     var formData = new FormData(e.target);
 
     try {
+ const testbytes = new Uint8Array([0x1b, 0x40, 0x48, 0x45, 0x4c, 0x4c, 0x4f, 0x1b, 0x64, 0x06, 0x1d, 0x56, 0x00]);
+
       const response = await fetch(endpoint, {
         method: "POST",
-        body: JSON.stringify({ text: formData.get("text") + "AND BONNIE!" }),
+        body: testbytes,
         credentials: "include",
         headers: { "X-CSRF-Token": token, "Content-Type": "application/json" },
       });
@@ -41,7 +43,7 @@ function App() {
 
   return (
     <>
-      <h1>Vite Receipt</h1>
+      <h1>Receipt Printer Raw ESC/POS</h1>
       <div className="card">
         <img src={ollie} className="logo" alt="Octopus logo" />
       </div>
