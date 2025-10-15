@@ -17,7 +17,6 @@ function App() {
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    var formData = new FormData(e.target);
 
     try {
  const testbytes = new Uint8Array([0x1b, 0x40, 0x48, 0x45, 0x4c, 0x4c, 0x4f, 0x1b, 0x64, 0x06, 0x1d, 0x56, 0x00]);
@@ -50,7 +49,7 @@ function App() {
       {token ? (
         <div>
           <form onSubmit={onSubmit}>
-            <label htmlFor="text">HELLO WORLD:</label>
+            <label htmlFor="text">Text to ignore:</label>
             <textarea
               id="text"
               name="text"
